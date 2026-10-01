@@ -1,10 +1,10 @@
-package edu.kirkwood.model;
+package edu.kirkwood.model.xml;
 
 import jakarta.xml.bind.annotation.*;
 
-@XmlAccessorType(XmlAccessType.FIELD) // Tells JAXB to use fields directly
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MovieSearchResult {
-    @XmlAttribute (name = "title")
+    @XmlAttribute(name = "title")
     private String title;
 
     @XmlAttribute(name = "year")
@@ -18,7 +18,6 @@ public class MovieSearchResult {
 
     @XmlAttribute(name = "poster")
     private String poster;
-
 
     public String getTitle() {
         return title;
