@@ -1,5 +1,8 @@
 package edu.kirkwood.dao;
 
+import edu.kirkwood.dao.json.JsonMovieDAO;
+import edu.kirkwood.dao.xml.XmlMovieDAO;
+
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -29,7 +32,17 @@ public class MovieDAOFactory {
                 }
                 return new XmlMovieDAO(apiURL);
 
-            // other cases for JSON, MYSQL, MongoDB, etc.
+            case "JSON":
+                String jsonApiURL = props.getProperty("json.apiURL");
+                if(jsonApiURL == null || jsonApiURL.isEmpty()) {
+                    throw new IllegalArgumentException("json.apiURL is required");
+                }
+                String jsonReadAccessToken = props.getProperty("json.apiReadAccessToken");
+                if(jsonReadAccessToken == null || jsonReadAccessToken.isEmpty()) {
+                    throw new IllegalArgumentException("json.apiReadAccessToken");
+                }
+                return new JsonMovieDAO(jsonApiURL, jsonReadAccessToken);
+
 
             default:
                 throw new IllegalArgumentException("Invalid data source type specified: " + sourceType);
